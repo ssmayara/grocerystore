@@ -3,7 +3,7 @@
 
 # ===== CONFIGURAÇÕES =====
 #CONTAINER_NAME="mariadb"
-CONTAINER_NAME="grocerystore-mariadb-1"
+CONTAINER_NAME="mariadb"
 DB_NAME="mydatabase"
 DB_USER="root"
 DB_PASS="verysecret"
