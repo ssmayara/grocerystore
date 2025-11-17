@@ -18,9 +18,9 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -33,14 +33,28 @@ class OrderItemServiceTest {
   @Mock
   private ProductDiscountService productDiscountService;
 
-  @InjectMocks
   private OrderItemService orderItemService;
 
-  public static final Long PRODUCT_ID = 1l;
+  public static final Long PRODUCT_ID = 1L;
   public static final Integer WEIGHT_GRANS = 100;
   public static final Integer MIN_WEIGHT_GRANS = 100;
   public static final Integer MAX_WEIGHT_GRANS = 500;
   public static final Integer DEFAULT_QUANTITY = 1;
+
+  @BeforeEach
+  void setUp() {
+    List<DiscountStrategy> strategies = List.of(
+        new VegetableDiscountStrategy(),
+        new BreadDiscountStrategy(),
+        new BeerDiscountStrategy()
+    );
+
+    this.orderItemService = new OrderItemService(
+        productService,
+        productDiscountService,
+        strategies
+    );
+  }
 
   @Test
   void createOrderItem_shouldThrowWhenUnitPriceIsNull() {
