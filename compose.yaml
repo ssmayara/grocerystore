@@ -10,6 +10,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
+      - ./db/bootstrap/:/docker-entrypoint-initdb.d/:ro
       - mariadb_data:/var/lib/mysql
 
   adminer:

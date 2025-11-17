@@ -20,8 +20,7 @@ public class OrderController {
     this.orderService = orderService;
 
   }
-
-  @PostMapping
+  @PostMapping(consumes = "application/json", produces = "application/json")
   public ResponseEntity<OrderResponse> createOrder(@RequestBody OrderRequest request) {
     OrderResponse response = orderService.createOrder(request);
     return ResponseEntity
